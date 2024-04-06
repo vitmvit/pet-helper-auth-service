@@ -1,5 +1,7 @@
 # pet-helper-auth-service
 
+[Точка входа в приложение](https://github.com/vitmvit/pet-helper-api-gateway-service)
+
 Данный микросервис предназначен для создания и проверки JWT токена, а также проверки доступа пользователя к функционалу.
 
 # Getting Started
