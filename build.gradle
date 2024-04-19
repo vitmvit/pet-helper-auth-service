@@ -21,7 +21,7 @@ dependencies {
     implementation "io.jsonwebtoken:jjwt-api:0.12.5"
     implementation "com.auth0:java-jwt:4.4.0"
 
-    implementation "by.vitikova.discovery:dto-lib:1.0"
+    implementation "by.vitikova.discovery:pet-helper-dto-lib:1.0"
     implementation "by.vitikova.discovery:logging-spring-boot-starter:2.0"
     implementation "by.vitikova.discovery:exception-error-handler-spring-boot-starter:2.0"
 
