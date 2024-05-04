@@ -3,7 +3,6 @@ package by.vitikova.discovery.service.impl;
 import by.vitikova.discovery.auth.JwtDto;
 import by.vitikova.discovery.auth.SignInDto;
 import by.vitikova.discovery.auth.SignUpCreateDto;
-import by.vitikova.discovery.auth.SignUpDto;
 import by.vitikova.discovery.config.TokenProvider;
 import by.vitikova.discovery.converter.UserConverter;
 import by.vitikova.discovery.exception.EntityNotFoundException;
@@ -19,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,7 +84,6 @@ public class AuthServiceImpl implements AuthService {
 
             userClient.updateLastVisit(dto.login());
             return buildJwt(dto.login(), dto.password());
-
         } catch (Exception e) {
             throw new EntityNotFoundException();
         }
