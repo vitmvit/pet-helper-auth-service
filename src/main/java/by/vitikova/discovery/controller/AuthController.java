@@ -1,5 +1,6 @@
 package by.vitikova.discovery.controller;
 
+import by.vitikova.discovery.UserDto;
 import by.vitikova.discovery.auth.JwtDto;
 import by.vitikova.discovery.auth.SignInDto;
 import by.vitikova.discovery.auth.SignUpCreateDto;
@@ -27,7 +28,7 @@ public class AuthController {
      * Регистрация нового пользователя
      *
      * @param dto объект SignUpDto с данными для регистрации
-     * @return объект ResponseEntity с JWT-токеном типа JwtDto и статусом OK
+     * @return объект ResponseEntity с созданным пользователем типа UserDto и статусом OK
      */
     @PostMapping("/signUp")
     public ResponseEntity<JwtDto> signUp(@RequestBody @Valid SignUpCreateDto dto) {

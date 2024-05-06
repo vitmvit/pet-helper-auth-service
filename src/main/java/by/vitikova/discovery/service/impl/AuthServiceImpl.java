@@ -51,16 +51,14 @@ public class AuthServiceImpl implements AuthService {
      */
     @Transactional
     public JwtDto signUp(SignUpCreateDto dto) {
-        if(!dto.password().equals(dto.passwordConfirm())){
+        if (!dto.password().equals(dto.passwordConfirm())) {
             throw new InvalidJwtException(PASSWORD_ERROR);
         }
-
         if (Boolean.TRUE.equals(userClient.existsByLogin(dto.login()).getBody())) {
             logger.error("AuthService: Invalid Jwt with message: " + USERNAME_IS_EXIST);
             throw new InvalidJwtException(USERNAME_IS_EXIST);
         }
         logger.info("AuthService: check sign up");
-
         String encryptedPassword = passwordEncoder.encode(dto.password());
         User newUser = new User(dto.login(), encryptedPassword, dto.role(), LocalDateTime.now(), LocalDateTime.now());
         userClient.create(userConverter.convertToUser(newUser));
@@ -81,7 +79,6 @@ public class AuthServiceImpl implements AuthService {
                 throw new InvalidJwtException(USERNAME_NOT_EXIST);
             }
             logger.info("AuthService: check sign in");
-
             userClient.updateLastVisit(dto.login());
             return buildJwt(dto.login(), dto.password());
         } catch (Exception e) {
