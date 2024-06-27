@@ -3,7 +3,10 @@ package by.vitikova.discovery.model.entity;
 import by.vitikova.discovery.constant.RoleName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,14 +29,17 @@ public class User implements UserDetails {
     @Id
     private String id;
 
+    @CreatedBy
     private String login;
 
     private String password;
 
     private RoleName role;
 
+    @CreatedDate
     private LocalDateTime createDate;
 
+    @LastModifiedBy
     private LocalDateTime lastVisit;
 
     /**
