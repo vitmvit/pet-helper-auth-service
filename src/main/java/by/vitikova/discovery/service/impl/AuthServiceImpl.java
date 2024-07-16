@@ -3,7 +3,6 @@ package by.vitikova.discovery.service.impl;
 import by.vitikova.discovery.auth.JwtDto;
 import by.vitikova.discovery.auth.SignInDto;
 import by.vitikova.discovery.auth.SignUpCreateDto;
-import by.vitikova.discovery.auth.SignUpDto;
 import by.vitikova.discovery.config.TokenProvider;
 import by.vitikova.discovery.converter.UserConverter;
 import by.vitikova.discovery.exception.EntityNotFoundException;
@@ -19,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,16 +51,14 @@ public class AuthServiceImpl implements AuthService {
      */
     @Transactional
     public JwtDto signUp(SignUpCreateDto dto) {
-        if(!dto.password().equals(dto.passwordConfirm())){
+        if (!dto.password().equals(dto.passwordConfirm())) {
             throw new InvalidJwtException(PASSWORD_ERROR);
         }
-
         if (Boolean.TRUE.equals(userClient.existsByLogin(dto.login()).getBody())) {
             logger.error("AuthService: Invalid Jwt with message: " + USERNAME_IS_EXIST);
             throw new InvalidJwtException(USERNAME_IS_EXIST);
         }
         logger.info("AuthService: check sign up");
-
         String encryptedPassword = passwordEncoder.encode(dto.password());
         User newUser = new User(dto.login(), encryptedPassword, dto.role(), LocalDateTime.now(), LocalDateTime.now());
         userClient.create(userConverter.convertToUser(newUser));
@@ -83,10 +79,8 @@ public class AuthServiceImpl implements AuthService {
                 throw new InvalidJwtException(USERNAME_NOT_EXIST);
             }
             logger.info("AuthService: check sign in");
-
             userClient.updateLastVisit(dto.login());
             return buildJwt(dto.login(), dto.password());
-
         } catch (Exception e) {
             throw new EntityNotFoundException();
         }

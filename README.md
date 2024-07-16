@@ -27,6 +27,22 @@ These additional references should also help you:
 
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 
+## Доступ
+
+Роли:
+
+- доступен всем
+
+## Swagger
+
+http://localhost:8082/api/doc/swagger-ui/index.html#/
+
+## Порт
+
+```text
+8082
+```
+
 ## AuthController (8082/api/v1/auth)
 
 Контроллер поддерживает следующие операции:
@@ -45,7 +61,7 @@ These additional references should also help you:
 Доступные роли:
 
 ```text
-ADMIN, USER, SUPPORT
+ADMIN, USER, SUPPORT, VET
 ```
 
 ## Реализация
@@ -125,7 +141,7 @@ Response:
 Request:
 
 ```http request
-http://localhost:8081/api/v1/auth/check?login=Admin
+http://localhost:8082/api/v1/auth/check?login=Admin
 
 ```
 

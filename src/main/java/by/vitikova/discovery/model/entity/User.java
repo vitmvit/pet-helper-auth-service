@@ -3,7 +3,11 @@ package by.vitikova.discovery.model.entity;
 import by.vitikova.discovery.constant.RoleName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,19 +25,23 @@ import static by.vitikova.discovery.constant.Constant.*;
 @Document(collection = "user")
 @Data
 @NoArgsConstructor
+@FieldNameConstants
 public class User implements UserDetails {
 
     @Id
     private String id;
 
+    @CreatedBy
     private String login;
 
     private String password;
 
     private RoleName role;
 
+    @CreatedDate
     private LocalDateTime createDate;
 
+    @LastModifiedBy
     private LocalDateTime lastVisit;
 
     /**
@@ -61,6 +69,13 @@ public class User implements UserDetails {
         }
         if (this.role == RoleName.SUPPORT) {
             return List.of(new SimpleGrantedAuthority(SUPPORT_ROLE), new SimpleGrantedAuthority(USER_ROLE));
+        }
+        if (this.role == RoleName.VET) {
+            return List.of(new SimpleGrantedAuthority(VET_ROLE), new SimpleGrantedAuthority(USER_ROLE));
+        }
+
+        if (this.role == RoleName.EDITOR) {
+            return List.of(new SimpleGrantedAuthority(EDITOR_ROLE), new SimpleGrantedAuthority(USER_ROLE));
         }
         return List.of(new SimpleGrantedAuthority(USER_ROLE));
     }
