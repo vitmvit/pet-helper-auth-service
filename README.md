@@ -27,9 +27,21 @@ These additional references should also help you:
 
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 
+## Доступ
+
+Роли:
+
+- доступен всем
+
 ## Swagger
 
 http://localhost:8082/api/doc/swagger-ui/index.html#/
+
+## Порт
+
+```text
+8082
+```
 
 ## AuthController (8082/api/v1/auth)
 

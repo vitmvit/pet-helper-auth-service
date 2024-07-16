@@ -3,6 +3,7 @@ package by.vitikova.discovery.model.entity;
 import by.vitikova.discovery.constant.RoleName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -24,6 +25,7 @@ import static by.vitikova.discovery.constant.Constant.*;
 @Document(collection = "user")
 @Data
 @NoArgsConstructor
+@FieldNameConstants
 public class User implements UserDetails {
 
     @Id

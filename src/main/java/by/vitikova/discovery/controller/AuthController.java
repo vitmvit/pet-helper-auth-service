@@ -1,10 +1,8 @@
 package by.vitikova.discovery.controller;
 
-import by.vitikova.discovery.UserDto;
 import by.vitikova.discovery.auth.JwtDto;
 import by.vitikova.discovery.auth.SignInDto;
 import by.vitikova.discovery.auth.SignUpCreateDto;
-import by.vitikova.discovery.auth.SignUpDto;
 import by.vitikova.discovery.service.AuthService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;

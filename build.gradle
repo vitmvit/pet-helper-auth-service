@@ -14,6 +14,7 @@ repositories {
 }
 
 dependencies {
+    testImplementation 'junit:junit:4.13.1'
     runtimeOnly 'com.netflix.eureka:eureka-client:2.0.2'
 
     implementation "ch.qos.logback:logback-core:1.5.0"
@@ -30,6 +31,9 @@ dependencies {
     implementation "org.springframework.cloud:spring-cloud-config-client"
     implementation 'org.springframework.cloud:spring-cloud-config-server:4.1.0'
     implementation 'org.springframework.boot:spring-boot-starter'
+//    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.1'
+
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -43,8 +47,11 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation "com.github.tomakehurst:wiremock-standalone:3.0.1"
+    testImplementation 'org.testcontainers:junit-jupiter:1.19.4'
+    testImplementation 'org.testcontainers:mongodb:1.19.4'
+    testImplementation "org.testcontainers:testcontainers:1.19.4"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
 test {
