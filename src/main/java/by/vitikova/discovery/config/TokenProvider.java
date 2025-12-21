@@ -1,6 +1,6 @@
 package by.vitikova.discovery.config;
 
-import by.vitikova.discovery.model.entity.User;
+import by.vitikova.discovery.constant.RoleName;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -13,29 +13,19 @@ import java.time.ZoneOffset;
 
 import static by.vitikova.discovery.constant.Constant.GENERATION_TOKEN_ERROR;
 
-/**
- * Класс, отвечающий за генерацию и проверку токенов аутентификации.
- */
 @Component
 public class TokenProvider {
 
     @Value("${security.jwt.token.secret-key}")
     private String jwtSecret;
 
-    /**
-     * Генерирует токен доступа для пользователя.
-     *
-     * @param user Пользователь, для которого генерируется токен доступа.
-     * @return Сгенерированный токен доступа.
-     * @throws JWTCreationException Если произошла ошибка при генерации токена.
-     */
-    public String generateAccessToken(User user) {
+    public String generateAccessToken(String login, RoleName role) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
             return JWT.create()
-                    .withSubject(user.getUsername())
-                    .withClaim("username", user.getUsername())
-                    .withClaim("role", user.getRole().toString())
+                    .withSubject(login)
+                    .withClaim("username", login)
+                    .withClaim("role", role.getRole())
                     .withExpiresAt(genAccessExpirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
@@ -43,11 +33,6 @@ public class TokenProvider {
         }
     }
 
-    /**
-     * Генерирует дату истечения срока действия токена доступа.
-     *
-     * @return Дата истечения срока действия токена доступа.
-     */
     private Instant genAccessExpirationDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }

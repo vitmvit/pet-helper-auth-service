@@ -4,12 +4,13 @@ import by.vitikova.discovery.auth.JwtDto;
 import by.vitikova.discovery.auth.SignInDto;
 import by.vitikova.discovery.auth.SignUpCreateDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import reactor.core.publisher.Mono;
 
 public interface AuthService {
 
-    JwtDto signUp(SignUpCreateDto dto);
+    Mono<JwtDto> signUp(SignUpCreateDto dto);
 
-    JwtDto signIn(SignInDto dto);
+    Mono<JwtDto> signIn(SignInDto dto);
 
-    boolean check(String token) throws JsonProcessingException;
+    Mono<Boolean> check(String token) throws JsonProcessingException;
 }
